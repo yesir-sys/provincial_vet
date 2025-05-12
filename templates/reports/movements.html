@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">
+            <i class="bi bi-clock-history"></i> Inventory Movements
+        </h4>
+        <div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="bi bi-funnel"></i> Filter
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?type=vet">Veterinary Supplies</a></li>
+                    <li><a class="dropdown-item" href="?type=office">Office Supplies</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="?action=created">Added Items</a></li>
+                    <li><a class="dropdown-item" href="?action=restocked">Restocked Items</a></li>
+                    <li><a class="dropdown-item" href="?action=depleted">Depleted Items</a></li>
+                    <li><a class="dropdown-item" href="?action=request_approved">Approved Requests</a></li>
+                    <li><a class="dropdown-item" href="?action=deleted">Deleted Items</a></li>
+                </ul>
+            </div>
+            <a href="{% url 'export-report' %}" class="btn btn-light">
+                <i class="bi bi-download"></i> Export
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Item</th>
+                        <th>Category</th>
+                        <th>Type</th>
+                        <th>Action</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Unit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for movement in movements %}
+                    <tr>
+                        <td>{{ movement.timestamp|date:"Y-m-d H:i" }}</td>
+                        <td>{{ movement.item_name }}</td>
+                        <td>{{ movement.category }}</td>
+                        <td>
+                            <span class="badge bg-{% if movement.item_type == 'vet' %}success{% else %}primary{% endif %}">
+                                {{ movement.item_type|title }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge bg-{{ movement.get_badge_class }}">
+                                {% if movement.action == 'created' %}
+                                    New Item Added
+                                {% elif movement.action == 'restocked' %}
+                                    Restocked
+                                {% elif movement.action == 'depleted' %}
+                                    Depleted
+                                {% elif movement.action == 'updated' %}
+                                    Updated
+                                {% elif movement.action == 'deleted' %}
+                                    Deleted
+                                {% else %}
+                                    {{ movement.action|title }}
+                                {% endif %}
+                            </span>
+                        </td>
+                        <td>{{ movement.previous_quantity|default:"-" }}</td>
+                        <td>{{ movement.quantity }}</td>
+                        <td>{{ movement.unit }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center p-4">
+                            <i class="bi bi-clock-history text-muted fs-1"></i>
+                            <p class="text-muted mt-2">No movement records found</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% include 'includes/pagination.html' %}
+    </div>
+</div>
+{% endblock %}

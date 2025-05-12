@@ -1,0 +1,114 @@
+.dashboard {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.icon-box {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-gradient-primary { background: linear-gradient(45deg, #0d6efd, #0a58ca); }
+.bg-gradient-warning { background: linear-gradient(45deg, #ffc107, #ffab00); }
+.bg-gradient-success { background: linear-gradient(45deg, #198754, #157347); }
+
+.activity-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.activity-icon.created { background-color: rgba(13,110,253,0.1); color: #0d6efd; }
+.activity-icon.restocked { background-color: rgba(25,135,84,0.1); color: #198754; }
+.activity-icon.depleted { background-color: rgba(255,193,7,0.1); color: #ffc107; }
+.activity-icon.request_approved { background-color: rgba(13,202,240,0.1); color: #0dcaf0; }
+.activity-icon.request_rejected { background-color: rgba(220,53,69,0.1); color: #dc3545; }
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+.chart-card {
+    min-height: 400px;
+    height: 100%;
+}
+
+/* Overview Cards */
+.card-overview {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 1rem;
+}
+
+.card-overview:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-overview .card-title {
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+}
+
+.card-overview .display-5 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+}
+
+.card-overview .stretched-link {
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: opacity 0.2s ease;
+}
+
+.card-overview .stretched-link:hover {
+    opacity: 1 !important;
+}
+
+.card-overview .text-white-50 {
+    font-size: 0.875rem;
+    opacity: 0.75;
+}
+
+/* Activity Feed */
+.activity-card {
+    height: 100%;
+    min-height: 500px;
+}
+
+.badge-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* Alert Cards */
+.alert {
+    border: none;
+    border-radius: 1rem;
+}
+
+.alert-dismissible .btn-close {
+    padding: 1.25rem;
+}
+
+/* Progress Bars */
+.progress {
+    height: 8px;
+    border-radius: 4px;
+}

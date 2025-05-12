@@ -1,0 +1,3 @@
+name,category,quantity,unit,expiration_date,notes
+Sample Medicine,Antibiotics,100,boxes,2024-12-31,Sample notes for medicine
+Test Vaccine,Vaccines,50,vials,2024-06-30,Storage instructions
